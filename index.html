@@ -178,7 +178,7 @@
             <div class="hire">
               <h2>You want us to do</h2>
               <!-- checkout formspree.io for easy form setup -->
-              <form class="work-request">
+              <form class="work-request" id="myForm" action="https://api.whatsapp.com/send" method="get" target="_blank">
                 <div class="work-request--options">
                   <span class="options-a">
                     <input id="opt-1" type="checkbox" value="app design">
@@ -247,7 +247,7 @@
                 </div>
                 <div class="work-request--information">
                   <div class="information-name">
-                    <input id="name" type="text" spellcheck="false">
+                    <input id="nameInput" name="text" type="text" spellcheck="false">
                     <label for="name">Name</label>
                   </div>
                   <div class="information-email">
@@ -255,7 +255,8 @@
                     <label for="email">Email</label>
                   </div>
                 </div>
-                <input type="submit" value="Send Request">
+                <input type="hidden" name="phone" value="9605061751"> 
+                <input type="submit" value="Chat">
               </form>
             </div>
           </li>
@@ -275,5 +276,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-2.2.4.min.js"><\/script>')</script>
 <script src="assets/js/functions-min.js"></script>
+<script>
+  document.getElementById("myForm").addEventListener("submit", function(event) {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+  
+    // Get the value entered in the input field
+    var name = document.getElementById("nameInput").value;
+  
+    // Country code and phone number (e.g., for the United States)
+    var countryCode = "+91"; // Country code for the United States
+    var phoneNumber = "9605061751"; // Replace this with the recipient's phone number
+  
+    // Construct the WhatsApp URL with the name as a parameter
+    var url = "https://api.whatsapp.com/send?phone=" + countryCode + phoneNumber + "&text=Hello,%20" + encodeURIComponent(name) + "!";
+  
+    // Redirect to the WhatsApp URL
+    window.location.href = url;
+  });
+  </script>
 </body>
 </html>
